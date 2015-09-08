@@ -1,0 +1,27 @@
+{
+  "name": "statsdc",
+  "version": "0.1.0",
+  "description": "A tiny statsd client that supports timing, counters and gauges",
+  "main": "statsdc.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "keywords": [
+    "statsd",
+    "client"
+  ],
+  "homepage": "https://github.com/martinrue/statsdc",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/martinrue/statsdc.git"
+  },
+  "author": "Martin Rue",
+  "license": "MIT",
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^2.3.2"
+  }
+}
