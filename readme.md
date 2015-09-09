@@ -41,6 +41,8 @@ stats.init({ host: 'localhost', port: 8125 }, function(err) {
 
 If `host` is set to a hostname rather than an IP address, a single DNS lookup is performed and cached during init.
 
+Set `prefix` to specify a prefix that'll be attached to all outgoing metrics. E.g. with `{ ... , prefix: 'my-app' }`, a call to `stats.c('some-counter', 1);` will add `1` to the counter named `my-app.some-counter`.
+
 If you need to shut down the client, `stats.close()` will gracefully unbind the UDP socket.
 
 Metrics are submitted to [statsd](https://github.com/etsy/statsd) on every respective call via UDP. A single UDP socket is created during init and reused.
