@@ -3,6 +3,13 @@ A tiny [statsd](https://github.com/etsy/statsd) client that supports timing, cou
 
 ### Installation
 
+##### NPM
+```
+npm install statsdc
+```
+
+##### GitHub
+
 ```
 npm install https://github.com/martinrue/statsdc/tarball/master
 ```
