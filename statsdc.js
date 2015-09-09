@@ -1,10 +1,16 @@
 var udp = require('./lib/udp');
 
+var prefix;
+
 var init = function(options, callback) {
   var err = validate(options);
 
   if (err) {
     return callback && callback(err);
+  }
+
+  if (options.prefix) {
+    prefix = options.prefix + '.';
   }
 
   return udp.init(options.host, options.port, callback);
@@ -37,7 +43,7 @@ var close = function() {
 };
 
 var sendMetric = function(name, value, type, sample) {
-  var data = [name, ':', value, '|', type];
+  var data = [prefix, name, ':', value, '|', type];
 
   if (sample) {
     data.push('|@' + sample);

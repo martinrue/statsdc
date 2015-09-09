@@ -74,4 +74,21 @@ describe('statsdc', function() {
       return done();
     });
   });
+
+  it('sends correct metric with prefix for gauges', function(done) {
+    stats.init({ host: 'localhost', port: 8080, prefix: 'some-app' }, function(err) {
+      expect(err).to.be(undefined);
+
+      stats.c('counter-1', 1);
+      expect(udp.getLastDatagram()).to.be('some-app.counter-1:1|c');
+
+      stats.g('gauge-1', 2);
+      expect(udp.getLastDatagram()).to.be('some-app.gauge-1:2|g');
+
+      stats.ms('timer-1', 3);
+      expect(udp.getLastDatagram()).to.be('some-app.timer-1:3|ms');
+
+      return done();
+    });
+  });
 });
