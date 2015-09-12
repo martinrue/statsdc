@@ -2,7 +2,7 @@ var udp = require('../../lib/udp');
 
 var lastDatagram;
 
-var activateMock = function() {
+var activate = function() {
   udp.send = function(data) {
     lastDatagram = data;
   };
@@ -17,7 +17,7 @@ var reset = function() {
 };
 
 module.exports = {
-  activateMock: activateMock,
+  activate: activate,
   getLastDatagram: getLastDatagram,
   reset: reset
 };

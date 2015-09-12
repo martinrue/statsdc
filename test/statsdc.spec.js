@@ -1,11 +1,11 @@
 var expect = require('expect.js');
 var stats = require('../statsdc');
-var udp = require('./mocks/udp');
+var udpMock = require('./mocks/udp-mock');
 
 afterEach(stats.close);
-afterEach(udp.reset);
+afterEach(udpMock.reset);
 
-udp.activateMock();
+udpMock.activate();
 
 describe('statsdc', function() {
   it('exposes correct public interface', function() {
@@ -38,10 +38,10 @@ describe('statsdc', function() {
       expect(err).to.be(undefined);
 
       stats.ms('timer-1', 250);
-      expect(udp.getLastDatagram()).to.be('timer-1:250|ms');
+      expect(udpMock.getLastDatagram()).to.be('timer-1:250|ms');
 
       stats.ms('timer-2', 500, 0.5);
-      expect(udp.getLastDatagram()).to.be('timer-2:500|ms|@0.5');
+      expect(udpMock.getLastDatagram()).to.be('timer-2:500|ms|@0.5');
 
       return done();
     });
@@ -52,10 +52,10 @@ describe('statsdc', function() {
       expect(err).to.be(undefined);
 
       stats.c('counter-1', 1);
-      expect(udp.getLastDatagram()).to.be('counter-1:1|c');
+      expect(udpMock.getLastDatagram()).to.be('counter-1:1|c');
 
       stats.c('counter-2', 2, 0.1);
-      expect(udp.getLastDatagram()).to.be('counter-2:2|c|@0.1');
+      expect(udpMock.getLastDatagram()).to.be('counter-2:2|c|@0.1');
 
       return done();
     });
@@ -66,10 +66,10 @@ describe('statsdc', function() {
       expect(err).to.be(undefined);
 
       stats.g('gauge-1', 50);
-      expect(udp.getLastDatagram()).to.be('gauge-1:50|g');
+      expect(udpMock.getLastDatagram()).to.be('gauge-1:50|g');
 
       stats.g('gauge-2', 100, 0.05);
-      expect(udp.getLastDatagram()).to.be('gauge-2:100|g|@0.05');
+      expect(udpMock.getLastDatagram()).to.be('gauge-2:100|g|@0.05');
 
       return done();
     });
@@ -80,13 +80,13 @@ describe('statsdc', function() {
       expect(err).to.be(undefined);
 
       stats.c('counter-1', 1);
-      expect(udp.getLastDatagram()).to.be('some-app.counter-1:1|c');
+      expect(udpMock.getLastDatagram()).to.be('some-app.counter-1:1|c');
 
       stats.g('gauge-1', 2);
-      expect(udp.getLastDatagram()).to.be('some-app.gauge-1:2|g');
+      expect(udpMock.getLastDatagram()).to.be('some-app.gauge-1:2|g');
 
       stats.ms('timer-1', 3);
-      expect(udp.getLastDatagram()).to.be('some-app.timer-1:3|ms');
+      expect(udpMock.getLastDatagram()).to.be('some-app.timer-1:3|ms');
 
       return done();
     });
